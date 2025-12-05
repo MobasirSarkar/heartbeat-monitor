@@ -32,8 +32,8 @@ pip install -r requirements.txt
 
 ## Running the program
 
-python main.py
+python main.py or python3 main.py
 
 ## Running tests
 
-pytest -v
+pytest -v test.py
