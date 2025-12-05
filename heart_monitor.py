@@ -28,48 +28,6 @@ def parse_event(raw: Dict[str, Any]) -> Event | None:
         return None
 
 
-# def detect_alerts(
-#    events: List[Dict[str, Any]], expected_interval_seconds: int, allowed_misses: int
-# ) -> List[Dict[str, str]]:
-#    """
-#    Alert Detection Algorithm:
-#      - it sort events per service.
-#      - track expected heartbeats
-#      - trigger alert on 3 consecutive missed intervals
-#      - alert timestamp = first missed hearbeat occurrence
-#    """
-#
-#    interval = timedelta(seconds=expected_interval_seconds)
-#    threshold_gap = interval * (allowed_misses + 1)
-#
-#    services = defaultdict(list)
-#    for raw in events:
-#        ev = parse_event(raw)
-#        if ev:
-#            services[ev.service].append(ev)
-#
-#    alerts = []
-#
-#    for service, evts in services.items():
-#        if len(evts) < 2:
-#            continue
-#
-#        evts.sort(key=lambda e: e.timestamp)
-#
-#        for prev, curr in zip(evts, evts[1:]):
-#            gap = curr.timestamp - prev.timestamp
-#            if gap >= threshold_gap:
-#
-#                # first missed heartbeat is exactly one interval after prev.
-#                first_missed = prev.timestamp + interval
-#                alerts.append(
-#                    {"service": service, "alerts_at": first_missed.strftime(ISO8601)}
-#                )
-#                break
-#
-#    return alerts
-
-
 def detect_alerts(
     events: List[Dict[str, Any]], expected_interval_seconds: int, allowed_misses: int
 ) -> List[Dict[str, str]]:
